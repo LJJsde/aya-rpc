@@ -33,20 +33,20 @@ func KCPListenInit(address string) {
 	block, _ := kcp.NewAESBlockCrypt(key)
 	if listener, err := kcp.ListenWithOptions(address, block, 10, 3); err == nil {
 		// spin-up the client
-		go Client()
+		go client()
 		for {
 			s, err := listener.AcceptKCP()
 			if err != nil {
 				log.Fatal(err)
 			}
-			go HandleEcho(s)
+			go handleEcho(s)
 		}
 	} else {
 		log.Fatal(err)
 	}
 }
 
-func HandleEcho(conn *kcp.UDPSession) {
+func handleEcho(conn *kcp.UDPSession) {
 	buf := make([]byte, 4096)
 	for {
 		n, err := conn.Read(buf)
@@ -63,7 +63,7 @@ func HandleEcho(conn *kcp.UDPSession) {
 	}
 }
 
-func Client() {
+func client() {
 	key := pbkdf2.Key([]byte("demo pass"), []byte("demo salt"), 1024, 32, sha1.New)
 	block, _ := kcp.NewAESBlockCrypt(key)
 

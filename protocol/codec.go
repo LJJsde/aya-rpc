@@ -1,10 +1,10 @@
 // @program:     rpc
-// @file:        code.go
+// @file:        codec.go
 // @author:      ugug
 // @create:      2023-06-11 05:27
 // @description:
 
-package Protocol
+package protocol
 
 import (
 	"bytes"
@@ -18,11 +18,11 @@ type CodeProcessor interface {
 	Encode(interface{}) (error, []byte)
 }
 
+// CodeProcess gob版本的接口实现
+// todo:加入protobuf和json接口
 type CodeProcess struct {
-	Processor CodeProcessor
+	Processor *CodeProcessor
 }
-
-//TODO：自己写个JSON序列化版本加上（虽然现在这个麻烦点好像也行
 
 func (c *CodeProcess) Decode(b []byte) (error, module.Info) {
 	var i module.Info

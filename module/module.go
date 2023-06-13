@@ -2,7 +2,7 @@
 // @file:        module.go
 // @author:      ugug
 // @create:      2023-06-11 05:27
-// @description:
+// @description: 暂定放置在多个包有引用的结构体，包内的在自己的包
 
 package module
 

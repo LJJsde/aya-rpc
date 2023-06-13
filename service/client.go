@@ -8,7 +8,6 @@ package service
 
 import (
 	"reflect"
-	"rpc/connection"
 	"rpc/module"
 	"time"
 )
@@ -20,23 +19,8 @@ type Client struct {
 	Conn interface{}
 }
 
-func ClientInit(network string, address string) {
-	switch network {
-	case "tcp":
-		{
-			connection.TestListen(nil, network, address)
+func ClientInit() {
 
-		}
-		//个人兴趣
-	case "kcp":
-		{
-			connection.KCPListenInit(address)
-		}
-	case "udp":
-		{
-		}
-
-	}
 }
 
 // Call 步骤（待优化
